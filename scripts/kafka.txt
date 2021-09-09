@@ -1,0 +1,29 @@
+#Start zookeeper
+zookeeper-server-start.bat C:\kafka\config\zookeeper.properties
+
+#Start kafka
+kafka-server-start.bat C:\kafka\config\server.properties
+
+#Listar tópicos
+kafka-topics --bootstrap-server localhost:9092 --list
+
+#Criar tópico
+kafka-topics --bootstrap-server localhost:9092 --create --topic new_activity
+
+#Criar tópico
+kafka-topics --bootstrap-server localhost:9092 --topic <nome_topico> --create --partitions 3 --replication-factor 1
+
+#Enviar mensagem via linha de comando:
+kafka-console-producer --broker-list localhost:9092 --topic new_activity
+
+#Consumir mensagens via linha de comando:
+kafka-console-consumer --bootstrap-server localhost:9092 --topic new_activity
+
+#Consumir mensagens via linha de comando (desde o inicio):
+kafka-console-consumer --bootstrap-server localhost:9092 --topic new_activity --from-beginning
+
+#Consumir mensagens em grupo
+kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic <nome_topico> --group <group-name>
+
+#Mostrar grupos
+kafka-consumer-groups --bootstrap-server localhost:9092 --list
